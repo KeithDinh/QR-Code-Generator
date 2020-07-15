@@ -1,0 +1,27 @@
+<input type="text" value="www.google.com" id="inputInfo" size=100><br>
+<canvas id="canvas"></canvas>
+<script src="jquery-3.5.1.min.js"></script>
+<script src="node_modules/qrcode/build/qrcode.min.js"></script>
+<script>
+  console.log($("#inputInfo").value)
+  $("#inputInfo").
+  // onblur: not focus on the input field
+		on("blur", () => {
+			makeQR($("#inputInfo").val());
+    }).
+    // keydown: press a key
+		on("keydown", (e) => {
+      // Keycode of "Enter" is 13
+      // For more information on the keycode: https://docstore.mik.ua/orelly/webprog/DHTML_javascript/0596004672_jvdhtmlckbk-app-b.html
+      if (e.keyCode == 13) 
+      {
+				makeQR($("#inputInfo").val());
+			}
+		});
+  makeQR = (text) => {
+    QRCode.toCanvas(document.getElementById('canvas'), text, function (error) {
+      if (error) console.error(error)
+    })
+  }
+  
+</script>
