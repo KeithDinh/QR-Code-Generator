@@ -1,9 +1,26 @@
+
+
 <input type="text" value="www.google.com" id="inputInfo" size=100><br>
 <canvas id="canvas"></canvas>
+
+<!-- The attribute download allows anchor tag to create popup window to browse save location -->
+<a id="download" download="QRcode.png" href="" onclick="exportPng(this);">Export to PNG</a>
+
+
+<!-- Import Jquery and npm qrcode package -->
 <script src="jquery-3.5.1.min.js"></script>
 <script src="node_modules/qrcode/build/qrcode.min.js"></script>
 <script>
-  console.log($("#inputInfo").value)
+  exportPng = (aTag) => {
+    // using $("#canvas") does not work
+    var imageURL = document.getElementById("canvas").toDataURL("image/png");
+    aTag.href = imageURL;
+  };
+
+
+
+
+
   $("#inputInfo").
   // onblur: not focus on the input field
 		on("blur", () => {
